@@ -1,8 +1,6 @@
-import axios, {
-  AxiosInstance
-} from 'axios';
+import axios from 'axios';
 
-const axiosClient: AxiosInstance = axios.create({
+const axiosClient = axios.create({
   baseURL: 'https://dog.ceo/api',
 });
 
