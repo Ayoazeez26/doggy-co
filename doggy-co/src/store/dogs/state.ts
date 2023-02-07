@@ -1,9 +1,7 @@
 export type State = {
-  allDogs: object[],
-  dogBreeds: object[]
+  dogs: object[]
 };
 
 export const state: State = {
-  allDogs: [],
-  dogBreeds: []
+  dogs: []
 };
