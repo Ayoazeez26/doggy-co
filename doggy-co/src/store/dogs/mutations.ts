@@ -1,7 +1,10 @@
-import { state } from './state';
+import type { State } from './state';
 
 export const mutations = {
-  SET_DOGS(state: State, dogs: object[]) {
-    state.dogs = dogs;
+  SET_ALLDOGS(state: State, allDogs: object[]) {
+    state.allDogs = allDogs;
+  },
+  SET_DOGBREEDS(state: State, dogBreeds: object[]) {
+    state.dogBreeds = dogBreeds;
   }
 };

@@ -11,15 +11,19 @@ watch(breed, (val) => {
   if (val !== '') {
     getDogsByBreed(val);
   }
-})
+});
+
+function capitalizeFirstLetter(letter: string): string {
+  return letter.charAt(0).toUpperCase() + letter.slice(1);
+}
 
 const getAllDogBreeds = (breeds: object[]) => {
   for (const [key, value] of Object.entries(breeds[0])) {
     if (value.length === 0) {
-      allBreeds.value.push(key);
+      allBreeds.value.push(capitalizeFirstLetter(key));
     } else {
       value.forEach(item => {
-        allBreeds.value.push(`${item} ${key}`);
+        allBreeds.value.push(`${capitalizeFirstLetter(item)} ${capitalizeFirstLetter(key)}`);
       });
     }
   };
@@ -29,7 +33,7 @@ const getAllDogBreeds = (breeds: object[]) => {
 const dogBreeds = computed(() => store.getters['dogs/getDogBreeds']);
 console.log(dogBreeds.value);
 
-if (dogBreeds.value.length < 1) {
+if (!dogBreeds.value) {
   fetchDogBreeds()
     .then((res) => {
       store.dispatch('dogs/setDogBreeds', [res.message]);
@@ -45,7 +49,7 @@ if (dogBreeds.value.length < 1) {
 }
 
 const getDogsByBreed = (breedName: string) => {
-  getByBreed(breedName)
+  getByBreed(breedName.toLowerCase())
     .then((res) => {
       console.log(res);
     })
@@ -58,7 +62,8 @@ const getDogsByBreed = (breedName: string) => {
 
 <template>
   <main>
-    <h2>Home Page</h2>
-    {{ allBreeds }}
+    <h2>DoggyCo</h2>
+    <!-- {{ allBreeds }} -->
+    <q-select class="q-mt-lg" outlined dense v-model="breed" :options="allBreeds" label="Select Breed" />
   </main>
 </template>
